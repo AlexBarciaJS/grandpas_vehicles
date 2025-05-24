@@ -6,3 +6,9 @@ estaba armado con un cañón ligero para apoyo de la infantería,
 fue modificado hasta que, hacia 1942, se empleó extensamente como cazacarros. 
 El Sturmgeschütz era conocido por su excelente relación entre precio y rendimiento.
 Hasta 1945 se habían construido unas 10 500 unidades.`;
+
+export const colors = {
+  emptyColor: "white",
+  backgroundColor1: "cadetblue",
+  backgroundColor2: "antiquewhite",
+};

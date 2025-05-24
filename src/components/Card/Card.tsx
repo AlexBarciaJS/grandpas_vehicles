@@ -1,14 +1,11 @@
 import { useState } from "react";
 import type { CardProps } from "../../types";
 import "./Card.css";
-
-const emptyColor = "white";
-const backgroundColor1 = "cadetblue";
-const backgroundColor2 = "antiquewhite";
+import { colors } from "../../constants";
 
 export const Card: React.FC<CardProps> = ({ image, description }) => {
   const [cardSide, setCardSide] = useState(-1);
-  const [background, setBackground] = useState(emptyColor);
+  const [background, setBackground] = useState(colors.emptyColor);
 
   const imgStyle = {
     transform: `scaleX(${cardSide})`,
@@ -16,11 +13,11 @@ export const Card: React.FC<CardProps> = ({ image, description }) => {
   };
 
   const buttonLeft = {
-    background: backgroundColor1,
+    background: colors.backgroundColor1,
   };
 
   const buttonRight = {
-    background: backgroundColor2,
+    background: colors.backgroundColor2,
   };
 
   const changeBackground = (color: string, side: number): string => {
@@ -37,7 +34,7 @@ export const Card: React.FC<CardProps> = ({ image, description }) => {
         aria-label="Basic mixed styles example"
       >
         <button
-          onClick={() => changeBackground(backgroundColor1, -1)}
+          onClick={() => changeBackground(colors.backgroundColor1, -1)}
           type="button"
           className="btn"
           style={buttonLeft}
@@ -45,7 +42,7 @@ export const Card: React.FC<CardProps> = ({ image, description }) => {
           Left
         </button>
         <button
-          onClick={() => changeBackground(backgroundColor2, 1)}
+          onClick={() => changeBackground(colors.backgroundColor2, 1)}
           type="button"
           className="btn"
           style={buttonRight}
@@ -64,7 +61,7 @@ export const Card: React.FC<CardProps> = ({ image, description }) => {
           <h5 className="card-title">Card title</h5>
           <p className="card-text">{description}</p>
           <a href="#" className="btn btn-primary">
-            Go somewhere
+            Go
           </a>
         </div>
       </div>
