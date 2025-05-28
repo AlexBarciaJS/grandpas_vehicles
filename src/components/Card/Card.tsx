@@ -1,30 +1,42 @@
 import { useState } from "react";
-import type { CardProps } from "../../types";
+import type { cardImgStyle, CardProps } from "../../types";
 import "./Card.css";
 import { colors } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../state/store";
+import {
+  incrementAsync,
+  incrementByAmount,
+} from "../../state/counter/counterSlice";
+
+const buttonLeft = {
+  background: colors.backgroundColor1,
+};
+
+const buttonRight = {
+  background: colors.backgroundColor2,
+};
+
+const getImgStyle = (side: number, background: string): cardImgStyle => {
+  return {
+    transform: `scaleX(${side})`,
+    backgroundColor: background,
+  };
+};
 
 export const Card: React.FC<CardProps> = ({ image, description }) => {
   const [cardSide, setCardSide] = useState(-1);
   const [background, setBackground] = useState(colors.emptyColor);
-
-  const imgStyle = {
-    transform: `scaleX(${cardSide})`,
-    backgroundColor: background,
-  };
-
-  const buttonLeft = {
-    background: colors.backgroundColor1,
-  };
-
-  const buttonRight = {
-    background: colors.backgroundColor2,
-  };
+  const imgStyle = getImgStyle(cardSide, background);
 
   const changeBackground = (color: string, side: number): string => {
     setBackground(color);
     setCardSide(side);
     return background;
   };
+
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <>
@@ -64,6 +76,21 @@ export const Card: React.FC<CardProps> = ({ image, description }) => {
             Go
           </a>
         </div>
+        <span>{count}</span>
+        <button
+          onClick={() => dispatch(incrementByAmount(10))}
+          type="button"
+          className="btn btn-primary"
+        >
+          Increment
+        </button>
+        <button
+          onClick={() => dispatch(incrementAsync(5))}
+          type="button"
+          className="btn btn-secondary"
+        >
+          Decrement
+        </button>
       </div>
     </>
   );
